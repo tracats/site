@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>黒猫洞窟の中…</title>
+  <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/images/top.png">
+</head>
+<body>
+  <svg width="0" height="0" class="hidden">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.47 24.94" id="arrow" class="arrow_svg">
+      <title>arrow</title>
+      <polygon points="0 24.94 0 19.66 7.35 12.47 0 5.92 0 0 12.47 12.47 0 24.94"/>
+    </symbol>
+  </svg>
+  <header class="header">
+    <div class="container">
+      <div class="header__logo"><img src="assets/images/tracat.png" alt="TraCatのロゴ"></div>
+      <div class="header__name">TraCat's self-introduction</div>
+    </div>
+  </header>
+  <main class="main main-page">
+    <!-- タイトルエリア　ここから -->
+    <h1 class="main-title"><img src="assets/images/header.png" alt=""></h1>
+    <!-- タイトルエリア　ここまで -->
+    <div id="stage">
+
+      <!-- STAGE0　ここから -->
+      <div id="sectionStage0" class="stage">
+
+        <!-- STAGE0問題セクション　ここから -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">試練０</span>はじまりの空間</h2>
+            <p class="text-center">あなたは黒猫洞窟の中に入り、先に進むと行き止まりにたどり着いた。<br>周囲を見渡したら、洞窟壁画を見つけた。</p>
+            <p class="text-center">どうやら、この絵は「問題」を表しているようだ。<br>なるほど。"頭を使え"とは、このことだろうか。<br>この問題を解けば、先に進むことができるかもしれない。</p>
+            <p class="text-center">下の画像の問題を解き、答えをキーワード欄に入力しよう。</p>
+            <p class="text-center">　</p>
+            <p class="text-center">あなたの脳内にこのような言葉が流れてきた。<br>「困ったときは、ヒントがある。なるべく見ないようにゲームを進めていこう。」<br>ゲーム？一体どういうことだろう？<br>とにかく、ヒントがもらえるのは有難い。<br>もしわからなくなったら使ってみよう。</p>
+            <div class="container">
+                <figure class="image__container">
+                    <img src="assets/images/q0.jpg" alt="">
+                </figure>
+            <!--  YouTube貼り付け
+                <div class="youtube__container">
+                    <div class="youtube">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/IRyJe-0Uie0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            Youtube貼り付けここまで -->     
+            </div>
+        </section>
+        <!-- STAGE0問題セクション　ここまで -->
+        
+        <!-- STAGE0解答入力セクション　ここから -->
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">試練０</span>答えを叫ぶ</h2>
+            <!------------------------------------------------------------------------------------------------------------
+              解答入力欄のコンポーネントです。入力欄・送信ボタン・エラーメッセージを表示します。
+              v-bind:correct="correctAnswer['stage1']['q1']" は正解の解答を指します。
+              v-on:answer-input="answerInput($event, 'stage1', 1)" は送信ボタンをクリックした時の動作を決める関数です。
+              2番目、3番目の1引数 'stage1', 1 はstage1の1問目ということになります。
+              1番麺の引数 $event は正解、不正解の判定を受け取る変数です。
+              []、()の間違い、''の抜けがあると動きません。
+            ------------------------------------------------------------------------------------------------------------>
+            <answer-input v-bind:correct="correctAnswer['stage0']['q1']" v-on:answer-input="answerInput($event, 'stage0', 1)"></answer-input>
+
+            <a class="link-hint" href="hint0.html" target="hint0">ヒントをみる ></a>
+          </div>
+        </section>
+        <!-- STAGE0解答入力セクション　ここまで -->
+
+        <!-- STAGE0クリア画面　ここから -->
+        <!------------------------------------------------------------------------------------------------------
+          ステージを全問正解するとclear['stage1']がtrusになります。
+          v-if="clear['stage1']"はclear['stage1']がtrueになったら表示します。
+          v-bind:class="{isClear:clear['stage1']}"はclear['stage1']がtrueになったら「isClear」クラスを追加します。
+        -------------------------------------------------------------------------------------------------------->
+        <section v-if="clear['stage0']" v-bind:class="{isClear:clear['stage0']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">試練０  クリア！</div>
+              <div class="clear-message__content">あなたは答えを叫ぶとゴゴゴと鳴り、道が開かれた。<br>素晴らしい。これで先に進めるようになった。</div>
+              <button v-on:click="nextStage('stage0')" onclick="location.href='#sectionStage1'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- STAGE0クリア画面　ここまで -->
+
+      </div>
+      <!-- STAGE0　ここまで -->
+
+      <!-- STAGE1　ここから -->
+      <!---------------------------------------------------------------------
+        クリア画面の「次のステージへ」ボタンをクリックしたら表示します。
+        v-if="next['stage1']"はnext['stage1']がtrueになったら表示します。
+      ----------------------------------------------------------------------->
+      <div v-if="next['stage0']" id="sectionStage1" class="stage">
+        <div class="story__note__outer bg-color--paper">
+            <ul class="story__note">
+                <h3>現在公開可能な情報</h3>
+                <p>TraCatの読み方は「とらっくきゃっと」と読む。<br>TraはTrackの略で、通り道やディスク状の記録媒体の記録単位の意味があります。<br>Catは猫のこと。由来は自分の立ち絵が猫だったからです。</p>
+            </ul>
+        </div>
+        <section>
+          <div class="section">
+            <div class="container">
+              <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">試練１</span>数字パズルの空間</h2>
+              <p class="text-center">あなたは先に進み続けると、広い空間に出た。<br>どうやら、次の試練にたどり着いたようだ。<br>周囲を見渡すと、また洞窟壁画を見つけた。<br>やはり「問題」のようだ。<br>下の画像の問題を解き、答えをキーワード欄に入力しよう。</p>
+            </div>
+          </div>
+          <div class="stage-column__container section bg-color--keycolor">
+            <div class="container">
+              <h2 class="section-title"><span class="section-title__stage">試練１</span>答えを叫ぶ</h2>
+              <p class="text-center">全て半角数字で答えよ。</p>
+              <!-------------------------------------------------------------
+                class名"row"内のclass名"column"が横並びになります。
+                改行する場合は以下のように追加してください。
+                <div class="row">
+                  <div class="column">
+                    ～ 内容 ～
+                  </div>
+                </div>
+              ------------------------------------------------------------->
+              <div class="row">
+
+                <!-- STAGE1-1　ここから -->
+                <div class="column">
+                  <!-- STAGE1-1問題セクション　ここから -->
+                  <figure class="image__container">
+                    <img src="assets/images/q1-1.jpg" alt="">
+                  </figure>
+                  <!-- STAGE1-1問題セクション　ここまで -->
+                  <!-- STAGE1-1解答入力セクション　ここから -->
+                  <answer-input v-bind:correct="correctAnswer['stage1']['q1']" v-on:answer-input="answerInput($event, 'stage1', 1)"></answer-input>
+                  <a class="link-hint" href="hint1.html" target="hint1">ヒントをみる ></a>
+                  <!-- STAGE1-1解答入力セクション　ここまで -->
+                </div><!-- /.column -->
+                <!-- STAGE1-1　ここまで -->
+
+                <div class="column">
+
+                  <figure class="image__container">
+                    <img src="assets/images/q1-2.jpg" alt="">
+                  </figure>
+
+                  <answer-input v-bind:correct="correctAnswer['stage1']['q2']" v-on:answer-input="answerInput($event, 'stage1', 2)"></answer-input>
+                  <a class="link-hint" href="hint1.html" target="hint1">ヒントをみる ></a>
+                </div>
+                  
+                <div class="column">
+
+                  <figure class="image__container">
+                    <img src="assets/images/test.jpg" alt="">
+                  </figure>
+
+                  <answer-input v-bind:correct="correctAnswer['stage1']['q3']" v-on:answer-input="answerInput($event, 'stage1', 3)"></answer-input>
+                  <a class="link-hint" href="hint1.html" target="hint2">ヒントをみる ></a>
+
+                </div>
+
+              </div><!-- /.row -->
+
+            </div>
+          </div>
+        </section>
+
+        <!-- STAGE1クリア画面　ここから -->
+        <section v-if="clear['stage1']" v-bind:class="{isClear:clear['stage1']}"  class="section section--clear bg-color--gray">
+          <div class="container">
+            <div class="clear-message">
+              <div class="clear-message__title">試練１　クリア！</div>
+              <div class="clear-message__content">答えを叫ぶと道が開かれた！<br>この調子で進んでいこう！</div>
+                <button v-on:click="nextStage('stage1')" onclick="location.href='#sectionStage2'" class="clear-message__btn btn">次のステージへ<svg class="btn__arrow"><use xlink:href="#arrow"></use></svg></button>
+            </div>
+          </div>
+        </section>
+        <!-- STAGE1クリア画面　ここまで -->
+      </div>
+      <!-- STAGE1　ここまで -->
+
+      <!-- STAGE2　ここから -->
+      <div v-if="next['stage1']" id="sectionStage2" class="stage">
+        <div class="story__note__outer bg-color--paper">
+            <ul class="story__note">
+                <h3>現在公開可能な情報</h3>
+                <p>TraCatの誕生日は2003年8月29日です。<br>ポップの王様と称された「<a class="link--" href="https://www.google.com/search?q=%E3%83%9E%E3%82%A4%E3%82%B1%E3%83%AB%E3%82%B8%E3%83%A3%E3%82%AF%E3%82%BD%E3%83%B3" target="_black" rel="noopener noreferrer">マイケル・ジャクソン</a>」と同じ誕生日です。<br>さらに、出身は埼玉県深谷市で、一万円の<a class="link--" href="https://www.google.com/search?q=%E6%B8%8B%E6%B2%A2%E6%A0%84%E4%B8%80" target="_black" rel="noopener noreferrer">渋沢栄一</a>と同じ生地です。</p>
+            </ul>
+        </div>
+        <!-- STAGE2-1問題セクション　ここから -->
+        <section class="section">
+          <div class="container">
+            <h2 class="section-title section-title--keycolorlight"><span class="section-title__stage">試練２</span>娯楽パズルの空間</h2>
+            <p class="text-center">あなたは奥に進むと、また広い空間に出た。<br>次の試練が待ち構えているだろう。<br>見渡すと、今度はピアノやパソコンが配置していた。<br>これを使って「問題」を解くのだろうか。<br>下の画像の問題を解き、答えをキーワード欄に入力しよう。</p>
+            <figure class="image__container">
+              <img src="assets/images/q2-1.jpg" alt="">
+            </figure>
+          </div>
+        </section>
+        <!-- STAGE2-1問題セクション　ここまで -->
+
+        <!-- STAGE2-1解答入力セクションここから -->
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">試練２</span>答えを叫ぶ</h2>
+            <p class="text-center">全てひらがなで答えよ。</p>
+            <!-----------------------------------------------------------------------------------------------------------------
+              解答入力欄のコンポーネントです。
+              v-on:answer-input="answerInput($event, 'stage3', 1, 'final')" は送信ボタンをクリックした時の動作を決める関数です。
+              4番目の引数 'final' は最終ステージを表します。
+            ------------------------------------------------------------------------------------------------------------------>
+            <answer-input v-bind:correct="correctAnswer['stage2']['q1']" v-on:answer-input="answerInput($event, 'stage2', 1, 'final')"></answer-input>
+            <a class="link-hint" href="hint2.html" target="hint3">ヒントをみる ></a>
+          </div>
+        </section>
+        <!-- STAGE2-1解答入力セクション　ここまで -->
+
+<!-- STAGE2-2問題セクション を追加
+
+          <section class="section">
+          <div class="container">
+
+            <figure class="image__container">
+              <img src="assets/images/stage.png" alt="">
+            </figure>
+          </div>
+        </section>
+
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">STAGE：3</span>キーワードを入力</h2>
+            <answer-input v-bind:correct="correctAnswer['stage3']['q2']" v-on:answer-input="answerInput($event, 'stage3', 2)"></answer-input>
+            <a class="link-hint" href="hint3.html" target="hint3">ヒントをみる ></a>
+          </div>
+        </section>
+      　　
+STAGE2-2追加ここまで -->
+
+          
+<!-- STAGE2-3問題セクション　を追加
+        <section class="section">
+          <div class="container">
+
+            <figure class="image__container">
+              <img src="assets/images/stage.png" alt="">
+            </figure>
+          </div>
+        </section>
+
+        <section class="section bg-color--keycolor">
+          <div class="container">
+            <h2 class="section-title"><span class="section-title__stage">STAGE：3</span>キーワードを入力</h2>
+
+            <answer-input v-bind:correct="correctAnswer['stage3']['q3']" v-on:answer-input="answerInput($event, 'stage3', 3)"></answer-input>
+            <a class="link-hint" href="hint3.html" target="hint3">ヒントをみる ></a>
+          </div>
+        </section>
+
+STAGE2-3追加　ここまで -->
+
+          
+      </div>
+      <!-- STAGE2　ここまで -->
+
+    </div>
+  </main>
+  <footer class="footer section bg-color--gray">
+    <div class="container">
+      <p class="text-center">制作: TraCat<br>協力: SHOMONAI非株式会社</p>
+      <p class="text-center">SHOMONAI非株式会社とTraCatで作られた「リアルトレジャーゲーム」の一環で<br>TraCatが制作したものであり、SHOMONAIが主催/公認するものではありません。</p>
+      <p class="text-center">お問い合わせ： tracat256@gmail.com</p>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
